@@ -1,5 +1,6 @@
 # react-sneakers
 
 ### Stack of technology:
-    React
-    SCSS
+##### React
+##### SCSS
+##### macro-css (миксины)
