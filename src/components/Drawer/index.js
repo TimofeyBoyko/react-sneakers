@@ -71,10 +71,7 @@ export const Drawer = ({
                   <b>{+totalCost * 0.05}</b>
                 </li>
               </ul>
-              <button
-                isLoading={isLoading}
-                onClick={() => completeOrder()}
-                className={styles.greenButton}>
+              <button onClick={() => completeOrder()} className={styles.greenButton}>
                 Оформить заказ <img src="/img/arrow.svg" alt="arrow" />{' '}
               </button>
             </div>
