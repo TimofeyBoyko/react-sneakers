@@ -1,6 +1,17 @@
 import styles from './Drawer.module.scss';
+import { Info } from '../Info';
 
-export const Drawer = ({ onClose, items, onRemove }) => {
+export const Drawer = ({
+  onClose,
+  items = [],
+  onRemove,
+  totalCost,
+  isOrderComplete,
+  setIsOrderComplete,
+  completeOrder,
+  orderId,
+  isLoading,
+}) => {
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
@@ -13,7 +24,17 @@ export const Drawer = ({ onClose, items, onRemove }) => {
             alt="remove"
           />
         </h2>
-        {items.length > 0 ? (
+        {isOrderComplete ? (
+          <Info
+            title="Заказ оформлен"
+            description={`Ваш заказ #${orderId} скоро будет перед курьерской службе`}
+            imgUrl="/img/complete-order.jpg"
+            onClose={() => {
+              onClose();
+              setIsOrderComplete();
+            }}
+          />
+        ) : items.length > 0 ? (
           <>
             <div className={styles.items}>
               {items &&
@@ -42,30 +63,29 @@ export const Drawer = ({ onClose, items, onRemove }) => {
                 <li className="d-flex">
                   <span>Итого:</span>
                   <div></div>
-                  <b>21 489 руб.</b>
+                  <b>{totalCost} руб.</b>
                 </li>
                 <li className="d-flex">
                   <span>Налог 5%:</span>
                   <div></div>
-                  <b>1074 руб.</b>
+                  <b>{+totalCost * 0.05}</b>
                 </li>
               </ul>
-              <button className={styles.greenButton}>
+              <button
+                isLoading={isLoading}
+                onClick={() => completeOrder()}
+                className={styles.greenButton}>
                 Оформить заказ <img src="/img/arrow.svg" alt="arrow" />{' '}
               </button>
             </div>
           </>
         ) : (
-          <div
-            className={`${styles.cartEmpty} d-flex align-center justify-center flex-column flex`}>
-            <img className="mb-20" width={120} height={120} src="/img/empty-cart.jpg" alt="empty" />
-            <h2>Корзина пуста</h2>
-            <p className="opacity-6">Добавьте хотябы одну пару кросовок, чтобы сделать заказ</p>
-            <button onClick={onClose} className={styles.greenButton}>
-              <img src="/img/arrow.svg" alt="arrow" />
-              Вернуться назад
-            </button>
-          </div>
+          <Info
+            title="Корзина пуста"
+            description="Добавьте хотябы одну пару кросовок, чтобы сделать заказ"
+            imgUrl="/img/empty-cart.jpg"
+            onClose={() => onClose()}
+          />
         )}
       </div>
     </div>

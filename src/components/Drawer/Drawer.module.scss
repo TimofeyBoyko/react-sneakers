@@ -88,6 +88,11 @@
   .greenButton {
     position: relative;
 
+    &:disabled {
+      background-color: #bebebe;
+      animation: button-loading 0.8s ease-in-out infinite;
+    }
+
     &:hover {
       img {
         transform: translateX(5px);
@@ -115,35 +120,23 @@
   cursor: pointer;
   transition: background 0.2s ease-in-out;
 
+  &:disabled {
+    background-color: #bebebe !important;
+  }
+
   &:hover {
     background: lighten($color: #9dd558, $amount: 5%);
   }
 }
 
-.cartEmpty {
-  text-align: center;
-
-  p {
-    width: 280px;
-    line-height: 24px;
+@keyframes button-loading {
+  0% {
+    opacity: 1;
   }
-
-  .greenButton {
-    width: 245px;
-    margin-top: 20px;
-
-    &:hover {
-      img {
-        transform: rotate(180deg) translateX(3px);
-      }
-    }
-
-    img {
-      position: relative;
-      top: 1px;
-      transform: rotate(180deg);
-      margin-right: 15px;
-      transition: transform 0.15s ease-in-out;
-    }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
   }
 }

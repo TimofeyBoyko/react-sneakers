@@ -2,10 +2,14 @@
 
 ### Stack of technology:
 
-##### React
+##### react
 
 ##### SCSS
 
 ##### macro-css (миксины)
 
 ##### CSS модули
+
+##### axios
+
+##### react-router
